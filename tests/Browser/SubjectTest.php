@@ -40,7 +40,11 @@ class SubjectTest extends DuskTestCase
         $this->browse(function (Browser $browser) use($user) {
             $browser->loginAs($user)
                 ->visit('/subjects/create')
-                ->assertSee('Предметы');
+                ->assertSee('Предмет')
+                ->type('title','математика')
+                ->press('Сохранить');
+            $browser->waitForText('Предметы')
+                ->assertSee('математика');
         });
     }
     public function testEdit()
@@ -54,7 +58,13 @@ class SubjectTest extends DuskTestCase
         $this->browse(function (Browser $browser) use($user, $subject) {
             $browser->loginAs($user)
                 ->visit('/subjects/'.$subject->id.'/edit')
-                ->assertInputValue('title','математика');
+                ->assertInputValue('title','математика')
+                ->assertInputValue('_method','PUT')
+                ->clear('title')
+                ->type('title','математика2')
+                ->press('Сохранить');
+            $browser->waitForText('Предметы')
+                ->assertSee('математика2');
         });
     }
 }

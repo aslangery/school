@@ -1,8 +1,9 @@
-<form class="form-horizontal">
+<form class="form-horizontal" action="{{!isset($sub)? url('/subjects'): url('/subjects/'.$sub->id)}}"
+method="post">
 <fieldset>
 
 <!-- Form Name -->
-<legend>Предметы</legend>
+<legend>Предмет</legend>
 
 <!-- Text input-->
 <div class="form-group">

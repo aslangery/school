@@ -36,7 +36,10 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sub=new Subject();
+        $sub->title=$request->title;
+        $sub->save();
+        return view('lists.subject_list',['sub_list'=>Subject::all()]);
     }
 
     /**
@@ -71,7 +74,10 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sub=Subject::find($id);
+        $sub->title=$request->get('title',$sub->title);
+        $sub->save();
+        return view('lists.subject_list',['sub_list'=>Subject::all()]);
     }
 
     /**
