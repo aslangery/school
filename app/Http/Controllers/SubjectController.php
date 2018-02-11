@@ -58,7 +58,8 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sub=Subject::find($id);
+        return view('forms.subjects_edit', ['sub'=>$sub]);
     }
 
     /**

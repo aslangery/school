@@ -43,4 +43,18 @@ class SubjectTest extends DuskTestCase
                 ->assertSee('Предметы');
         });
     }
+    public function testEdit()
+    {
+        $user = factory(User::class)->create([
+            'email' => 'taylor@laravel.com',
+        ]);
+        $subject = factory(Subject::class)->create([
+            'title' => 'математика',
+        ]);
+        $this->browse(function (Browser $browser) use($user, $subject) {
+            $browser->loginAs($user)
+                ->visit('/subjects/'.$subject->id.'/edit')
+                ->assertInputValue('title','математика');
+        });
+    }
 }
