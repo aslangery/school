@@ -88,6 +88,7 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Subject::destroy($id);
+        return view('lists.subject_list',['sub_list'=>Subject::all()]);
     }
 }
